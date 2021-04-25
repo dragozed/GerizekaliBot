@@ -7,7 +7,7 @@ my_secret = os.environ['DISCORD_BOT_TOKEN']
 client = discord.Client()
 token = os.getenv("DISCORD_BOT_TOKEN")
 
-print("I am online")
+print("I am ONLAYN")
 
 @client.event
 
