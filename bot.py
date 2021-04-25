@@ -2,7 +2,6 @@ import os
 import discord
 import time
 import random
-import numpy as np
 
 my_secret = os.environ['DISCORD_BOT_TOKEN']
 client = discord.Client()
