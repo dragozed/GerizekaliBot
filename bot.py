@@ -12,7 +12,8 @@ global duelistDatabase
 duelistDatabase= [0]* 100
 global scoreDatabase
 scoreDatabase= [0]* 100
-
+global duelBit
+duelBit= True
 
 def changeDuelistScore(duelist, k): 
   n= 0
