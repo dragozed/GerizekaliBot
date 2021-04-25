@@ -47,6 +47,7 @@ async def on_message(message):
       
       
     if message.content.startswith("Accepted") and duelBit== True and duelist1 != message.author: #Duel accepted function
+      duelBit= False
       duelist2= message.author #duel participant 2
       await message.channel.send(str(duelist1)+" vs "+str(duelist2))
       roll1= random.randint(0,6) #roll1
@@ -67,7 +68,7 @@ async def on_message(message):
       if roll1==roll2:
         await message.channel.send("Draw ")
 
-      duelBit= False
+
       
     if message.content.startswith("Total Score"):
       x= message.author
