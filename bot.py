@@ -38,7 +38,7 @@ async def on_message(message):
     if message.content.startswith("Help"): #Duel me function
       await message.channel.send("The commands are: \n Duel me; Accepted; Total Score\nBen ezik bir botum")
 
-    if message.content.startswith("Duel me"): #Duel me function
+    if message.content.startswith("Duel me") and duelBit== False: #Duel me function
       global duelBit #duelBit defines if duel is active
       global duelist1 #duel participant 1
       duelist1= message.author
