@@ -12,8 +12,6 @@ global duelistDatabase
 duelistDatabase= [0]* 100
 global scoreDatabase
 scoreDatabase= [0]* 100
-global n #duelist index
-n= 0
 
 
 def changeDuelistScore(duelist, k): 
@@ -67,30 +65,19 @@ async def on_message(message):
       if roll1==roll2:
         await message.channel.send("Draw ")
 
-      f = open("data.txt", "a+") #open txt file append only, meaning: Open the file for writing. The data being written will be inserted at the end, after the existing data. 
-      f.write("Winner is:"+str(duelist1)+"; ")
-      print(f.read())
-      f.close()
       duelBit= False
       
     if message.content.startswith("Total Score"):
       x= message.author
-      
       n= 0
       while n<100:
         if duelistDatabase[n]== x:
-          await message.channel.send("Total Score is: "+str(scoreDatabase[n]))
+          await message.channel.send("Score is: "+str(scoreDatabase[n]))
           break
         if n== 99:
-          await message.channel.send("Total Score is: 0")
-          n=0; break
+          await message.channel.send("Score is: 0")
+          break
         n= n+1
-   
-    
-    if message.content.startswith("helikopter"):
-        await message.channel.send(user.id)
 
 
-
-    
 client.run(token)
