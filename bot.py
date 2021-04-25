@@ -79,13 +79,15 @@ async def on_message(message):
       n= 0
       while n<100:
         if duelistDatabase[n]== x:
+          await message.channel.send("Total wins are: "+str(scoreDatabase[n]))
           break
         if n== 99:
+          await message.channel.send("Total wins are: 0")
           n=0; break
         n= n+1
         print(duelistDatabase[n])
       
-      await message.channel.send("Total wins are: "+str(scoreDatabase[n]))
+      
     
     
     
