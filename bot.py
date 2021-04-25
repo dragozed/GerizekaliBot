@@ -12,8 +12,30 @@ global duelistDatabase
 duelistDatabase= [0]* 100
 global scoreDatabase
 scoreDatabase= [0]* 100
-@client.event
+global n #duelist index
+n= 0
 
+
+def changeDuelistScore(duelist, k): 
+  n= 0
+  while n<100:
+    if duelistDatabase[n]== duelist:
+      break
+    if n== 99:
+      n=0
+      while n<100:
+        if duelistDatabase[n]==0:
+          duelistDatabase[n]= duelist ; break
+        n= n+1
+      break  
+    n= n+1
+  scoreDatabase[n]= scoreDatabase[n]+ k
+  return n
+
+
+
+@client.event
+      
 async def on_message(message):
   
     if message.content.startswith("Duel me"): #Duel me function
@@ -36,34 +58,12 @@ async def on_message(message):
       time.sleep(1)
       if roll1>roll2:#duelist1 won
         await message.channel.send("Winner is:"+str(duelist1))
-        n= 0
-        while n<100:
-          if duelistDatabase[n]== duelist1:
-            break
-          if n== 99:
-            n=0
-            while n<100:
-              if duelistDatabase[n]==0:
-                duelistDatabase[n]= duelist1 ; break
-              n= n+1
-            break  
-          n= n+1
-        scoreDatabase[n]= scoreDatabase[n]+1
+        changeDuelistScore(duelist1, +1)
+        changeDuelistScore(duelist2, -1)
       if roll2>roll1:#duelist2 won
         await message.channel.send("Winner is: "+str(duelist2))
-        n= 0
-        while n<100:
-          if duelistDatabase[n]== duelist2:
-            break
-          if n== 99:
-            n=0
-            while n<100:
-              if duelistDatabase[n]==0:
-                duelistDatabase[n]= duelist2 ; break
-              n= n+1
-            break  
-          n= n+1
-        scoreDatabase[n]= scoreDatabase[n]+1
+        changeDuelistScore(duelist2, +1)
+        changeDuelistScore(duelist1, -1)
       if roll1==roll2:
         await message.channel.send("Draw ")
 
@@ -79,17 +79,13 @@ async def on_message(message):
       n= 0
       while n<100:
         if duelistDatabase[n]== x:
-          await message.channel.send("Total wins are: "+str(scoreDatabase[n]))
+          await message.channel.send("Total Score is: "+str(scoreDatabase[n]))
           break
         if n== 99:
-          await message.channel.send("Total wins are: 0")
+          await message.channel.send("Total Score is: 0")
           n=0; break
         n= n+1
-        print(duelistDatabase[n])
-      
-      
-    
-    
+   
     
     if message.content.startswith("helikopter"):
         await message.channel.send(user.id)
