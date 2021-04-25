@@ -35,7 +35,9 @@ def changeDuelistScore(duelist, k):
 @client.event
       
 async def on_message(message):
-  
+    if message.content.startswith("Help"): #Duel me function
+      await message.channel.send("Duel me; Accepted; Total Score")
+
     if message.content.startswith("Duel me"): #Duel me function
       global duelBit #duelBit defines if duel is active
       global duelist1 #duel participant 1
