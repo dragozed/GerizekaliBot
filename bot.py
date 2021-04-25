@@ -35,8 +35,9 @@ async def on_message(message):
         await message.channel.send("Winner is:"+str(duelist1))
       if roll2>roll1:
         await message.channel.send("Winner is: "+str(duelist2))
-      f = open("data.txt", "a") #open txt file append only, meaning: Open the file for writing. The data being written will be inserted at the end, after the existing data. 
+      f = open("data.txt", "a+") #open txt file append only, meaning: Open the file for writing. The data being written will be inserted at the end, after the existing data. 
       f.write("Winner is:"+str(duelist1)+"; ")
+      print(f.read())
       f.close()
       duelBit= False
       
