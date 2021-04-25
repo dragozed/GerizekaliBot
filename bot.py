@@ -9,7 +9,10 @@ client = discord.Client()
 token = os.getenv("DISCORD_BOT_TOKEN")
 
 print("I am ONLAYN")
-
+global duelistDatabase
+duelistDatabase= [0]* 100
+global scoreDatabase
+scoreDatabase= [0]* 100
 @client.event
 
 async def on_message(message):
@@ -32,10 +35,36 @@ async def on_message(message):
       time.sleep(2)
       await message.channel.send(str(duelist2)+" rolls "+str(roll2))
       time.sleep(1)
-      if roll1>roll2:
+      if roll1>roll2:#duelist1 won
         await message.channel.send("Winner is:"+str(duelist1))
-      if roll2>roll1:
+        n= 0
+        while n<100:
+          if duelistDatabase[n]== duelist1:
+            break
+          if n== 99:
+            n=0
+            while n<100:
+              if duelistDatabase[n]==0:
+                duelistDatabase[n]= duelist1 ; break
+              n= n+1
+            break  
+          n= n+1
+        scoreDatabase[n]= scoreDatabase[n]+1
+      if roll2>roll1:#duelist2 won
         await message.channel.send("Winner is: "+str(duelist2))
+        n= 0
+        while n<100:
+          if duelistDatabase[n]== duelist2:
+            break
+          if n== 99:
+            n=0
+            while n<100:
+              if duelistDatabase[n]==0:
+                duelistDatabase[n]= duelist2 ; break
+              n= n+1
+            break  
+          n= n+1
+        scoreDatabase[n]= scoreDatabase[n]+1
       if roll1==roll2:
         await message.channel.send("Draw ")
 
@@ -47,7 +76,7 @@ async def on_message(message):
       
     if message.content.startswith("Total Score"):
       x= message.author
-      global duelistDatabase= np.zeros(100)
+      
       n= 0
       while n<100:
         if duelistDatabase[n]== x:
@@ -55,7 +84,8 @@ async def on_message(message):
         if n== 99:
           n=0; break
         n= n+1
-      global scoreDatabase
+        print(duelistDatabase[n])
+      
       await message.channel.send("Total wins are: "+str(scoreDatabase[n]))
     
     
