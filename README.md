@@ -1,3 +1,3 @@
 # GerizekaliBot
-Discord bot for our friend community discord.\
+Discord bot for our community discord.\
 Not much to see here.
